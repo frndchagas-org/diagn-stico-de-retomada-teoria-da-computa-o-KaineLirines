@@ -9,52 +9,143 @@ Responda individualmente. Use suas palavras. Se usar IA depois da primeira tenta
 
 Marque cada tópico como: lembro bem, lembro parcialmente, não lembro, nunca vi ou não tenho certeza.
 
-- alfabeto:
-- cadeia:
-- linguagem:
-- gramática:
-- autômato finito:
-- linguagem regular:
-- linguagem livre de contexto:
-- linguagem sensível ao contexto:
-- linguagem irrestrita:
-- hierarquia de Chomsky:
-- computabilidade:
-- máquina de Turing:
+- alfabeto:não lembro
+- cadeia:não lembro
+- linguagem:não lembro
+- gramática:não lembro
+- autômato finito:não lembro
+- linguagem regular:não lembro
+- linguagem livre de contexto:não lembro
+- linguagem sensível ao contexto:não lembro
+- linguagem irrestrita:não lembro
+- hierarquia de Chomsky:não lembro
+- computabilidade:não lembro
+- máquina de Turing:lembro parcialmente
 
-## 2. Definições com exemplo
-
-Explique, com suas palavras e com um exemplo simples, usando o alfabeto `Sigma = {a, b}`.
-
+2. Definições com exemplo
 1. O que é um alfabeto?
+
+Um alfabeto é um conjunto de símbolos usados para formar palavras ou cadeias.
+
+Exemplo usando:
+
+Σ = {a, b}
+
+Nesse caso, só podemos usar as letras a e b.
+
 2. O que é uma cadeia?
+
+Uma cadeia é uma sequência de símbolos do alfabeto.
+
+Exemplos:
+
+a
+ab
+bba
+aaab
+
+Todas essas cadeias utilizam apenas símbolos do alfabeto {a,b}.
+
 3. O que é uma linguagem?
+
+Uma linguagem é um conjunto de cadeias que seguem uma regra.
+
+Exemplo:
+
+L = { cadeias que terminam com b }
+
+Cadeias que pertencem:
+
+b
+ab
+aab
+bb
+
+Cadeias que não pertencem:
+
+a
+aba
 4. O que é uma gramática?
 
-## 3. Linguagens
+Uma gramática é um conjunto de regras usado para gerar cadeias de uma linguagem.
 
-Considere as linguagens:
+Exemplo:
 
-```text
+S -> aS
+S -> b
+
+Essa gramática gera:
+
+b
+ab
+aab
+aaab
+
+Ela produz várias letras a seguidas de um b.
+
+3. Linguagens
+Linguagem L1
 L1 = { w em {0,1}* | w termina com 01 }
+1. Escreva três palavras que pertencem à linguagem
+01
+101
+1101
+2. Escreva duas palavras que não pertencem
+10
+111
+3. Diga, se souber, em qual classe ela provavelmente se encaixa
+
+Provavelmente é uma linguagem regular.
+
+4. Explique o motivo em linguagem simples
+
+Porque basta verificar os dois últimos símbolos da cadeia. Um autômato finito consegue fazer isso facilmente.
+
+Linguagem L2
 L2 = { a^n b^n | n >= 0 }
+1. Escreva três palavras que pertencem à linguagem
+ab
+aabb
+aaabbb
+
+Também existe:
+
+ε
+
+(cadeia vazia, quando n = 0)
+
+2. Escreva duas palavras que não pertencem
+aab
+abb
+3. Diga, se souber, em qual classe ela provavelmente se encaixa
+
+Provavelmente é livre de contexto.
+
+4. Explique o motivo em linguagem simples
+
+Porque a quantidade de letras a precisa ser igual à quantidade de letras b. Um autômato finito não consegue contar indefinidamente, mas uma pilha consegue.
+
+Linguagem L3
 L3 = { a^n b^n c^n | n >= 0 }
-```
+1. Escreva três palavras que pertencem à linguagem
+abc
+aabbcc
+aaabbbccc
+2. Escreva duas palavras que não pertencem
+aabcc
+aaabbcc
+3. Diga, se souber, em qual classe ela provavelmente se encaixa
 
-Para cada linguagem:
+Provavelmente é sensível ao contexto.
 
-1. escreva três palavras que pertencem à linguagem;
-2. escreva duas palavras que não pertencem;
-3. diga, se souber, em qual classe ela provavelmente se encaixa;
-4. explique o motivo em linguagem simples.
+4. Explique o motivo em linguagem simples
 
-Não há problema em dizer "não sei". Nesse caso, escreva o que te deixou em dúvida.
+Porque é necessário garantir ao mesmo tempo a mesma quantidade de a, b e c, o que é mais complexo do que linguagens livres de contexto.
 
-## 4. Autômato finito
+4. Autômato finito
 
-Considere o autômato abaixo, sobre o alfabeto `{0,1}`:
+Considere o autômato:
 
-```text
 Estados: q0, q1, q2
 Estado inicial: q0
 Estado final: q2
@@ -66,60 +157,132 @@ q1 --0--> q1
 q1 --1--> q2
 q2 --0--> q1
 q2 --1--> q0
-```
-
-Responda:
-
 1. Qual linguagem esse autômato parece reconhecer?
-2. Execute manualmente as cadeias abaixo e diga se aceita ou rejeita:
-   - `01`
-   - `101`
-   - `100`
-   - `1101`
-   - `111`
-3. Monte uma tabela curta mostrando o caminho dos estados para pelo menos duas cadeias.
 
-## 5. Gramática
+Ele parece reconhecer cadeias que terminam com:
+
+01
+
+Porque o estado final q2 é alcançado quando aparece um 1 depois de um 0.
+
+2. Execute manualmente as cadeias abaixo e diga se aceita ou rejeita
+Cadeia 01
+q0 --0--> q1
+q1 --1--> q2
+
+Resultado: aceita.
+
+Cadeia 101
+q0 --1--> q0
+q0 --0--> q1
+q1 --1--> q2
+
+Resultado: aceita.
+
+Cadeia 100
+q0 --1--> q0
+q0 --0--> q1
+q1 --0--> q1
+
+Resultado: rejeita.
+
+Cadeia 1101
+q0 --1--> q0
+q0 --1--> q0
+q0 --0--> q1
+q1 --1--> q2
+
+Resultado: aceita.
+
+Cadeia 111
+q0 --1--> q0
+q0 --1--> q0
+q0 --1--> q0
+
+Resultado: rejeita.
+
+3. Monte uma tabela curta mostrando o caminho dos estados para pelo menos duas cadeias
+Cadeia 101
+Símbolo	Estado
+início	q0
+1	q0
+0	q1
+1	q2
+
+Resultado: aceita.
+
+Cadeia 100
+Símbolo	Estado
+início	q0
+1	q0
+0	q1
+0	q1
+
+Resultado: rejeita.
+
+5. Gramática
 
 Considere a gramática:
 
-```text
 S -> aS
 S -> b
-```
+1. Gere cinco cadeias produzidas por essa gramática
+b
+ab
+aab
+aaab
+aaaab
+2. Descreva a linguagem em palavras
 
-Responda:
+A linguagem possui várias letras a seguidas de um único b no final.
 
-1. Gere cinco cadeias produzidas por essa gramática.
-2. Descreva a linguagem em palavras.
-3. Essa gramática parece regular, livre de contexto ou outra classe? Justifique de forma simples.
+3. Essa gramática parece regular, livre de contexto ou outra classe? Justifique de forma simples
 
-## 6. Ponto de dificuldade
+Ela parece ser uma gramática regular.
 
-Escolha um tópico da lista inicial e escreva:
+Justificativa:
 
-1. o que você entende dele;
-2. onde você se confunde;
-3. que tipo de explicação ajudaria: desenho, exemplo, exercício guiado, analogia, prova passo a passo ou lista curta.
+As regras seguem um padrão simples e não precisam de memória complexa para funcionar.
+
+Ela representa algo como:
+
+a* b
+6. Ponto de dificuldade
+1. O que você entende dele
+
+Entendo que linguagens formais possuem regras e que autômatos servem para reconhecer cadeias válidas.
+
+2. Onde você se confunde
+
+Tenho dificuldade em diferenciar quando uma linguagem é regular, livre de contexto ou sensível ao contexto.
+
+3. Que tipo de explicação ajudaria
+
+Exercícios guiados e exemplos passo a passo comparando as classes de linguagens.
 
 ## 7. Uso de IA, se houver
 
-Se você usou IA depois da primeira tentativa, registre:
-
-```text
 Pergunta feita:
-Resumo da resposta:
-Como eu verifiquei:
-O que eu alterei na minha resposta:
-O que ainda não entendi:
-```
+"Explique linguagens formais, autômatos e gramáticas com exemplos simples."
 
+Resumo da resposta:
+A IA explicou os conceitos básicos de alfabetos, cadeias, linguagens, gramáticas e classes de linguagens.
+
+Como eu verifiquei:
+Comparei com anotações da aula e exemplos vistos pelo professor.
+
+O que eu alterei na minha resposta:
+Reescrevi as explicações com palavras mais simples e adicionei exemplos próprios.
+
+O que ainda não entendi:
+Ainda tenho dúvidas sobre a diferença entre linguagens livres de contexto e sensíveis ao contexto.
 ## Submissão no Moodle
 
 Depois de finalizar, copie no Moodle:
 
 ```text
-Repositório:
+Repositório: diagn-stico-de-retomada-teoria-da-computa-o-KaineLirines
+
 Commit final:
 Autoavaliação: nível atual, maior dificuldade e tópico que precisa ser retomado.
 ```
